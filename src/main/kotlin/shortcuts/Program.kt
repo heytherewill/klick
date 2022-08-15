@@ -1,7 +1,7 @@
 package shortcuts
 
 sealed interface Program {
-    object WindowsTerminal : Program
+    object Terminal : Program
     object Slack : Program
     object Spotify : Program
     object VisualStudioCode : Program

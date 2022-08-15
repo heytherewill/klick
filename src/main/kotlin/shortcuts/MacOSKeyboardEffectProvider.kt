@@ -6,10 +6,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
-import javax.inject.Singleton
 
-@Singleton
-class WindowsKeyboardEffectProvider : KeyboardEffectProvider {
+class MacOSKeyboardEffectProvider : KeyboardEffectProvider {
     private val workPrograms = listOf(
         Program.togglTrack,
         Program.gmail,
@@ -21,13 +19,13 @@ class WindowsKeyboardEffectProvider : KeyboardEffectProvider {
 
     private fun Program.start() {
         val command = when (this) {
-            Program.Terminal -> "wt"
-            Program.Slack -> "slack://app"
-            Program.Spotify -> "spotify"
+            Program.Terminal -> "iterm2"
+            Program.Slack -> "open -a slack"
+            Program.Spotify -> "open -a spotify"
             Program.VisualStudioCode -> "code"
-            Program.Todoist -> "%appdata%\\..\\Local\\Programs\\todoist\\Todoist.exe"
+            Program.Todoist -> "open -a todoist"
             Program.BluetoothSettings -> "ms-settings:bluetooth"
-            is Program.Firefox -> "rundll32 url.dll,FileProtocolHandler $uri"
+            is Program.Firefox -> "firefox -g $uri"
         }
 
         Runtime.getRuntime().exec(command)

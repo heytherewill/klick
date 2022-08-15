@@ -1,6 +1,5 @@
 
 import com.toggl.komposable.architecture.Store
-import com.toggl.komposable.scope.DispatcherProvider
 import dagger.Component
 import domain.AppAction
 import domain.AppState
@@ -18,9 +17,6 @@ import javax.inject.Singleton
 internal interface Entrypoint {
     @Singleton
     fun store(): Store<AppState, AppAction>
-
-    @Singleton
-    fun dispatcherProvider(): DispatcherProvider
 
     companion object {
         @JvmStatic

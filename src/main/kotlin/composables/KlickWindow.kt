@@ -38,7 +38,6 @@ fun KlickWindow(
     Window(
         transparent = true,
         undecorated = true,
-        visible = true,
         state = rememberWindowState(
             position = WindowPosition.Aligned(Alignment.BottomEnd),
             size = DpSize(400.dp, 110.dp)
