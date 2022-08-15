@@ -1,23 +1,29 @@
-// Copyright 2000-2021 JetBrains s.r.o. and contributors. Use of this source code is governed by the Apache 2.0 license that can be found in the LICENSE file.
-import androidx.compose.ui.geometry.Size
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.application
 import composables.KeyboardEventListener
+import domain.AppAction
+import domain.AppState
 import shortcuts.WindowsKeyboardHandler
 
 fun main() = application {
     val handler = WindowsKeyboardHandler()
+    val store = remember { Entrypoint.create().store() }
+
+    val state by store.state.collectAsState(AppState())
+    val dispatcher: (AppAction) -> Unit = store::dispatch
 
     KeyboardEventListener(handler) {
         Tray(
             icon = painterResource("tray.png"),
+            onAction = { dispatcher(AppAction.TrayDoubleClicked) },
             menu = {
                 Item(
-                    "Exit",
+                    text = "Exit",
                     onClick = { exitApplication() }
                 )
             }

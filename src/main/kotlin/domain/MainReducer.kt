@@ -4,8 +4,11 @@ import com.toggl.komposable.architecture.Effect
 import com.toggl.komposable.architecture.Mutable
 import com.toggl.komposable.architecture.Reducer
 import com.toggl.komposable.extensions.mutateWithoutEffects
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class MainReducer(
+@Singleton
+class MainReducer @Inject constructor(
 
 
 ) : Reducer<AppState, AppAction> {

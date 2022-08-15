@@ -25,6 +25,10 @@ dependencies {
 
     // Komposable Architecture
     implementation("com.toggl:komposable-architecture:0.1.1")
+
+    // Dagger
+    implementation("com.google.dagger:dagger:2.43.1")
+    kapt("com.google.dagger:dagger-compiler:2.43.1")
 }
 
 tasks.withType<KotlinCompile> {
