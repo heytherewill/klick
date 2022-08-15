@@ -17,39 +17,47 @@ import javax.inject.Singleton
 
 @Module
 interface DomainModule {
-    @Provides
-    @Singleton
-    fun dispatcherProvider() = DispatcherProvider(
-        io = Dispatchers.IO,
-        computation = Dispatchers.Default,
-        main = Dispatchers.Main
-    )
-
-    @Provides
-    @Singleton
-    @DelicateCoroutinesApi
-    fun storeScopeProvider() = StoreScopeProvider { GlobalScope }
 
     @Binds
     @IntoSet
-    fun mainReducer(mainReducer: MainReducer): Store<AppState, AppAction>
+    fun mainReducer(mainReducer: MainReducer): Reducer<AppState, AppAction>
 
-    @Provides
-    @Singleton
-    fun reducer(
-        reducers: Set<@JvmSuppressWildcards Reducer<@JvmSuppressWildcards AppState, @JvmSuppressWildcards AppAction>>
-    ): Reducer<AppState, AppAction> = combine(*reducers.toTypedArray())
+    @Module
+    companion object {
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun dispatcherProvider() = DispatcherProvider(
+            io = Dispatchers.IO,
+            computation = Dispatchers.Default,
+            main = Dispatchers.Default
+        )
 
-    @Provides
-    @Singleton
-    fun store(
-        reducer: Reducer<AppState, AppAction>,
-        dispatcherProvider: DispatcherProvider,
-        storeScopeProvider: StoreScopeProvider
-    ) = createStore(
-        reducer = reducer,
-        initialState = AppState(),
-        dispatcherProvider = dispatcherProvider,
-        storeScopeProvider = storeScopeProvider
-    )
+        @Provides
+        @Singleton
+        @DelicateCoroutinesApi
+        @JvmStatic
+        fun storeScopeProvider() = StoreScopeProvider { GlobalScope }
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun reducer(
+            reducers: Set<@JvmSuppressWildcards Reducer<@JvmSuppressWildcards AppState, @JvmSuppressWildcards AppAction>>
+        ): Reducer<AppState, AppAction> = combine(*reducers.toTypedArray())
+
+        @Provides
+        @Singleton
+        @JvmStatic
+        fun store(
+            reducer: Reducer<AppState, AppAction>,
+            dispatcherProvider: DispatcherProvider,
+            storeScopeProvider: StoreScopeProvider
+        ) = createStore(
+            reducer = reducer,
+            initialState = AppState(),
+            dispatcherProvider = dispatcherProvider,
+            storeScopeProvider = storeScopeProvider
+        )
+    }
 }
