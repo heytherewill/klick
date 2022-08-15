@@ -3,8 +3,9 @@ import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.6.10"
-    id("org.jetbrains.compose") version "1.1.0"
+    kotlin("jvm") version "1.7.0"
+    kotlin("kapt") version "1.7.0"
+    id("org.jetbrains.compose") version "1.2.0-alpha01-dev750"
 }
 
 group = "com.heytherewill"
@@ -19,7 +20,11 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
 
+    // Listeners
     implementation("com.github.kwhat:jnativehook:2.2.2")
+
+    // Komposable Architecture
+    implementation("com.toggl:komposable-architecture:0.1.1")
 }
 
 tasks.withType<KotlinCompile> {
