@@ -4,7 +4,6 @@ import com.toggl.komposable.architecture.Effect
 import domain.AppAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.awt.Robot
 import java.awt.Toolkit
 import java.awt.datatransfer.DataFlavor
 import javax.inject.Inject
@@ -18,7 +17,7 @@ class WindowsKeyboardEffectProvider @Inject constructor() : KeyboardEffectProvid
         Program.WindowsTerminal,
         Program.Spotify,
         Program.Slack,
-        Program.Todoist,
+        Program.Todoist
     )
 
     private fun Program.start() {
@@ -56,7 +55,7 @@ class WindowsKeyboardEffectProvider @Inject constructor() : KeyboardEffectProvid
             }
         }
 
-        override fun middleKey()  = object : Effect<AppAction> {
+        override fun middleKey() = object : Effect<AppAction> {
             override suspend fun execute(): AppAction? {
                 // Open all work programs
                 workPrograms.forEach { it.start() }

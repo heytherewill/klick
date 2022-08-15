@@ -3,7 +3,6 @@ package shortcuts
 import com.toggl.komposable.architecture.Effect
 import domain.AppAction
 
-
 interface KeyboardEffectProvider {
     val shiftLayer: Layer
     val controlLayer: Layer

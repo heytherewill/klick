@@ -1,11 +1,9 @@
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.window.Tray
 import androidx.compose.ui.window.application
-import com.toggl.komposable.scope.StoreScopeProvider
 import composables.KeyboardEventListener
 import domain.AppAction
 import domain.AppState
@@ -27,7 +25,6 @@ fun main() = application {
                 )
             }
         )
-
 
     }
 }

@@ -1,7 +1,6 @@
 package domain
 
 import com.toggl.komposable.architecture.Reducer
-import com.toggl.komposable.architecture.Store
 import com.toggl.komposable.extensions.combine
 import com.toggl.komposable.extensions.createStore
 import com.toggl.komposable.scope.DispatcherProvider

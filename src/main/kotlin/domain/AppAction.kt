@@ -12,4 +12,3 @@ sealed interface AppAction {
 
     data class KeyPressed(val actionKey: ActionKey) : AppAction
 }
-

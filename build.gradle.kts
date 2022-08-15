@@ -6,6 +6,7 @@ plugins {
     kotlin("jvm") version "1.7.0"
     kotlin("kapt") version "1.7.0"
     id("org.jetbrains.compose") version "1.2.0-alpha01-dev750"
+    id("com.diffplug.spotless") version "6.8.0"
 }
 
 group = "com.heytherewill"
@@ -53,6 +54,14 @@ compose.desktop {
                 menuGroup = "heytherewill"
             }
         }
+    }
+}
 
+apply(plugin = "com.diffplug.spotless")
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        ktlint("0.46.1")
     }
 }
