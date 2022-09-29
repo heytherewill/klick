@@ -22,7 +22,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
-import androidx.compose.ui.window.WindowPosition
 import androidx.compose.ui.window.rememberWindowState
 import domain.AppAction
 import java.awt.Toolkit
@@ -39,7 +38,6 @@ fun KlickWindow(
         transparent = true,
         undecorated = true,
         state = rememberWindowState(
-            position = WindowPosition.Aligned(Alignment.BottomEnd),
             size = DpSize(400.dp, 110.dp)
         ),
         onCloseRequest = { dispatcher(AppAction.CloseWindowClicked) }
@@ -48,8 +46,8 @@ fun KlickWindow(
 
         Column(
             modifier = Modifier
-                .background(theme.colors.background, shape = theme.windowShape)
-                .shadow(1.dp, spotColor = theme.colors.onBackground, shape = theme.windowShape)
+                .background(theme.colors.background, shape = theme.window.shape)
+                .shadow(1.dp, spotColor = theme.colors.onBackground, shape = theme.window.shape)
         ) {
             Row(
                 horizontalArrangement = Arrangement.SpaceBetween,

@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class MacOS : Os {
+    override val platform = Os.Platform.MacOS
+
     override suspend fun launch(program: Program): Unit = withContext(Dispatchers.IO) {
         val command = when (program) {
             Program.Terminal -> "iterm2"

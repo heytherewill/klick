@@ -4,6 +4,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class Windows : Os {
+    override val platform = Os.Platform.Windows
 
     override suspend fun launch(program: Program): Unit = withContext(Dispatchers.IO) {
         val command = when (program) {

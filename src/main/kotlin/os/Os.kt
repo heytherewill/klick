@@ -1,7 +1,13 @@
 package os
 
 interface Os {
-    suspend fun launch(program: Program)
+    val platform: Platform
 
+    suspend fun launch(program: Program)
     suspend fun shutdown()
+
+    enum class Platform {
+        MacOS,
+        Windows
+    }
 }

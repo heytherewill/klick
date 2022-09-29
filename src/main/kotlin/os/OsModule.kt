@@ -18,5 +18,9 @@ interface OsModule {
                 else -> throw IllegalStateException("Running on an unsupported OS")
             }
         }
+
+        @Provides
+        @JvmStatic
+        fun platform(os: Os) = os.platform
     }
 }

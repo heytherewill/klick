@@ -7,20 +7,34 @@ import androidx.compose.ui.window.application
 import composables.KeyboardEventListener
 import composables.KlickWindow
 import composables.Settings
-import composables.Theme
+import composables.macOSTheme
+import composables.windowsTheme
 import domain.AppAction
 import domain.AppState
+import os.Os
 
 fun main() = application {
-    val store = remember { Entrypoint.create().store() }
+    val entrypoint = remember { Entrypoint.create() }
+    val store = remember { entrypoint.store() }
+    val platform = remember { entrypoint.platform() }
 
-    val theme = remember { Theme() }
+    val theme = remember {
+        when (platform) {
+            Os.Platform.MacOS -> macOSTheme
+            Os.Platform.Windows -> windowsTheme
+        }
+    }
     val state by store.state.collectAsState(AppState())
     val dispatcher: (AppAction) -> Unit = store::dispatch
 
     KeyboardEventListener(dispatcher) {
         Tray(
-            icon = painterResource("tray.png"),
+            icon = painterResource(
+                when (platform) {
+                    Os.Platform.Windows -> "tray.png"
+                    Os.Platform.MacOS -> "tray-macos.png"
+                }
+            ),
             onAction = { dispatcher(AppAction.TrayDoubleClicked) },
             menu = {
                 Item(
