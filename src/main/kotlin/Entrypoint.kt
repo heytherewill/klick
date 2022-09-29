@@ -4,6 +4,7 @@ import dagger.Component
 import domain.AppAction
 import domain.AppState
 import domain.DomainModule
+import os.OsModule
 import shortcuts.ShortcutModule
 import javax.inject.Singleton
 
@@ -11,7 +12,8 @@ import javax.inject.Singleton
 @Component(
     modules = [
         DomainModule::class,
-        ShortcutModule::class
+        ShortcutModule::class,
+        OsModule::class
     ]
 )
 internal interface Entrypoint {
